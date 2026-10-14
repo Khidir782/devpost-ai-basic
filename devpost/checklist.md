@@ -9,7 +9,7 @@ Build mode: fast
 
 ## Slices
 
-- [ ] **1. Scaffolding, 12-column grid dashboard, and sample Threads loader**
+- [x] **1. Scaffolding, 12-column grid dashboard, and sample Threads loader**
   Becomes usable: A running Next.js web application at `http://localhost:3000` with the rigid 12-column shadcn/ui-inspired layout, Header, InputWorkbench with textarea, "Load Sample Scraped Data" button that populates realistic raw Threads posts, Clear button, and client-side pre-validation alert banner.
   Why now: Bootstraps Next.js with TypeScript and Tailwind CSS, and provides the interactive surface and realistic test input needed for everything else.
   PRD ref: `prd.md > The Core Journey` (steps 1-3), `prd.md > Screens and Layout`, `prd.md > Features and Behavior (Data Ingestion & Sanitization)`
@@ -19,7 +19,7 @@ Build mode: fast
   Learner check: Open `http://localhost:3000`, click "Load Sample Scraped Data" to see messy Threads posts fill the box, try submitting empty to see the inline error.
   Commit: `feat: scaffold Next.js app with 12-column dashboard and sample Threads loader`
 
-- [ ] **2. Server-side Gemini extraction with PII sanitization and Zod schema validation**
+- [x] **2. Server-side Gemini extraction with PII sanitization and Zod schema validation**
   Becomes usable: An active `/api/extract` backend route that calls Gemini 2.5 Flash to strip PII (usernames, handles, contact info), classify posts into target categories (Sports, Politics, Tech, etc.), and infer demographic signals (Age Group & Gender, marking ambiguous items as `"Unspecified"`), with Zod schema validation and error fallback.
   Why now: Delivers and proves the unique kernel and biggest technical risk first—proving the AI model strictly produces schema-compliant, privacy-scrubbed JSON before wiring the full analytics view.
   PRD ref: `prd.md > Features and Behavior (Data Ingestion & Sanitization, Category & Topic Classification, Demographic Inference & Outlier Handling)`
@@ -29,7 +29,7 @@ Build mode: fast
   Learner check: Review the extracted JSON payload returned from the API and confirm handles and emails are stripped while categories are accurately assigned.
   Commit: `feat: implement server-side Gemini extraction with PII removal and Zod validation`
 
-- [ ] **3. Analytical metrics calculation with demographic outlier isolation and dashboard visualization**
+- [x] **3. Analytical metrics calculation with demographic outlier isolation and dashboard visualization**
   Becomes usable: Full end-to-end analytical dashboard. Clicking "Extract & Transform" transitions through a skeleton loading state, then renders summary metrics: Total Posts, PII Scrubbed badge, Category Distribution percentage bars, and Demographic Split (Age Group & Gender) where `"Unspecified"` posts are cleanly isolated as an outlier badge rather than skewing the percentage breakdown.
   Why now: Delivers the primary product value for the data analyst—instant aggregate insights with statistically sound outlier handling.
   PRD ref: `prd.md > The Core Journey` (steps 4-5), `prd.md > Features and Behavior (Category & Topic Classification, Demographic Inference & Outlier Handling)`
@@ -39,7 +39,7 @@ Build mode: fast
   Learner check: Click "Extract & Transform" on sample data and verify the percentage distributions and outlier badges calculate and display cleanly on the 12-column grid.
   Commit: `feat: add analytics metrics overview with demographic outlier handling`
 
-- [ ] **4. Sanitized records table, raw JSON viewer with 1-click copy, and end-to-end integration**
+- [x] **4. Sanitized records table, raw JSON viewer with 1-click copy, and end-to-end integration**
   Becomes usable: Complete proof of concept ready for demo recording. Below the analytics overview, analysts can inspect individual sanitized posts in a clean table/card list (verifying PII removal post-by-post), toggle the raw validated JSON viewer, and click "Copy JSON" to receive immediate visual confirmation.
   Why now: Completes the entire core loop and demo flow—providing the exportable artifact and inspection tool needed for a 60-second walkthrough video.
   PRD ref: `prd.md > The Core Journey` (step 5), `prd.md > Features and Behavior (Schema-Validated JSON Output)`, `prd.md > Look and Feel`
@@ -51,7 +51,7 @@ Build mode: fast
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — Slice 2 (server-side Gemini extraction and PII scrubbing verified)
+- [x] Early usable behavior explored — Slice 2 (server-side Gemini extraction and PII scrubbing verified)
 - [ ] Final kick-the-tires exploration and feedback completed
 
 ## Final Review
