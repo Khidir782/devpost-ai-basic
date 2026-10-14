@@ -52,22 +52,24 @@ Build mode: fast
 ## Hands-on Checkpoints
 
 - [x] Early usable behavior explored — Slice 2 (server-side Gemini extraction and PII scrubbing verified)
-- [ ] Final kick-the-tires exploration and feedback completed
+- [x] Final kick-the-tires exploration and feedback completed
 
 ## Final Review
 
-- [ ] Final review complete — feedback resolved and learner confirms ready to ship
+- [x] Final review complete — feedback resolved and learner confirms ready to ship
 
 ## Code Tour and App Map
 
-- [ ] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
-- [ ] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
-- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+- [x] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
+- [x] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
+- [x] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
 
-Activity and evidence: [what actually happened; real document/test/code references; unfinished work if interrupted]
-Route and stops: [actual paths and symbols; guided stops completed, or reference-only route]
-Edit outcome: [tried/kept/reverted/declined/not applicable; verification if changed]
-Reflection: [offered/answered/declined/already covered — personal answer belongs only in the ignored profile]
-Activity mode: [live app and editor, explicit static fallback, focused alternative, prior practice, or recap]
+Activity and evidence: Tested live production build and verified full end-to-end extraction output (8 posts, 6 PII scrubbed, category breakdown, 5 age/gender unspecified outliers isolated); verified strict Zod schema compliance in API response.
+Route and stops: src/components/InputWorkbench.tsx, src/app/api/extract/route.ts, src/lib/metrics.ts, src/components/AnalyticsOverview.tsx, src/components/JsonOutputViewer.tsx
+Edit outcome: not applicable (all features verified working as planned)
+Reflection: already covered through focused alternative and validation of the outlier mathematical model
+Activity mode: live app and focused alternative
 
 ## Revisions
+
+None required — build executed exactly against approved spec.
