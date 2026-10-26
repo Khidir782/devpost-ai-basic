@@ -62,3 +62,8 @@ This project followed a strict plan-first, spec-driven development methodology:
 - [Technical Specification](devpost/spec.md) — Architecture, components, data model, and failure modes.
 - [Build Checklist](devpost/checklist.md) — Ordered slices with mechanical verifications and commits.
 - [Standalone App Map](devpost/app-map.html) — Interactive architectural reference and reusable practices.
+
+---
+
+## License
+Distributed under the [MIT License](LICENSE). See `LICENSE` for more information.
