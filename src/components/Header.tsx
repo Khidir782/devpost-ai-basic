@@ -1,38 +1,40 @@
 import React from "react";
-import { ShieldCheck, Activity, Terminal } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Sparkles } from "lucide-react";
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  engine?: string;
+}
+
+export const Header: React.FC<HeaderProps> = ({ engine }) => {
   return (
-    <header className="col-span-12 border-b border-slate-800/80 bg-slate-900/50 backdrop-blur px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <div className="flex items-center space-x-3">
-        <div className="p-2 rounded-md bg-sky-950/60 border border-sky-800/60 text-sky-400">
-          <Terminal className="w-5 h-5" />
+    <header className="col-span-12 border-b border-border pb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex items-center space-x-3.5">
+        <div className="w-9 h-9 rounded-lg border border-border bg-secondary flex items-center justify-center text-primary">
+          <Sparkles className="w-4 h-4" />
         </div>
         <div>
-          <div className="flex items-center space-x-2">
-            <h1 className="text-lg font-semibold tracking-tight text-slate-100">
+          <div className="flex items-center space-x-2.5">
+            <h1 className="text-base font-semibold tracking-tight text-foreground">
               Threads Insight Pipeline
             </h1>
-            <span className="text-xs font-mono px-2 py-0.5 rounded border border-slate-700 bg-slate-800/60 text-slate-300">
-              POC v1.0
-            </span>
+            <Badge variant="outline" className="text-[10px] uppercase">
+              POC
+            </Badge>
           </div>
-          <p className="text-xs text-slate-400">
-            Automated social data extraction, PII sanitation, and demographic percentage analytics
+          <p className="text-xs text-muted-foreground mt-0.5">
+            Automated topic classification and demographic intelligence for social media streams
           </p>
         </div>
       </div>
 
-      <div className="flex items-center space-x-4 text-xs font-mono text-slate-400">
-        <div className="flex items-center space-x-1.5">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>PII Sanitization Active</span>
-        </div>
-        <div className="flex items-center space-x-1.5">
-          <Activity className="w-4 h-4 text-sky-400" />
-          <span>Engine: Gemini 2.5 Flash</span>
+      <div className="flex items-center">
+        <div className="flex items-center space-x-2 px-3 py-1 rounded-lg border border-border bg-card text-xs font-mono text-muted-foreground">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+          <span>{engine || "Gemini 2.5 Flash"}</span>
         </div>
       </div>
     </header>
   );
 };
+

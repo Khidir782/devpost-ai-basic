@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { ExtractionResponse } from "@/lib/schemas";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Code2, Copy, Check } from "lucide-react";
 
 interface JsonOutputViewerProps {
@@ -26,38 +28,42 @@ export const JsonOutputViewer: React.FC<JsonOutputViewerProps> = ({ data }) => {
   };
 
   return (
-    <div className="col-span-12 rounded-lg border border-slate-800 bg-slate-900/60 p-5">
-      <div className="flex items-center justify-between border-b border-slate-800/80 pb-3 mb-3">
+    <Card className="col-span-12 p-6 rounded-lg border border-border bg-card shadow-sm">
+      <CardHeader className="flex flex-row items-center justify-between p-0 pb-4 border-b border-border mb-4">
         <div className="flex items-center space-x-2">
-          <Code2 className="w-4 h-4 text-sky-400" />
-          <h3 className="text-sm font-semibold text-slate-200">
-            Validated Schema-Compliant JSON
-          </h3>
+          <Code2 className="w-4 h-4 text-primary" />
+          <CardTitle className="text-sm font-semibold tracking-wide uppercase">
+            Validated JSON Output
+          </CardTitle>
         </div>
 
-        <button
+        <Button
           type="button"
           id="copy-json-btn"
+          size="sm"
+          variant="outline"
           onClick={handleCopy}
-          className="inline-flex items-center space-x-1.5 rounded-md border border-slate-700 bg-slate-800 px-3 py-1 text-xs font-mono font-medium text-slate-200 hover:bg-slate-700 hover:text-white transition"
+          className="h-8 px-3 text-xs font-mono rounded-lg"
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-400">Copied!</span>
+              <Check className="w-3.5 h-3.5 mr-1.5 text-primary" />
+              <span>Copied</span>
             </>
           ) : (
             <>
-              <Copy className="w-3.5 h-3.5" />
+              <Copy className="w-3.5 h-3.5 mr-1.5 text-muted-foreground" />
               <span>Copy JSON</span>
             </>
           )}
-        </button>
-      </div>
+        </Button>
+      </CardHeader>
 
-      <div className="relative rounded-md border border-slate-800 bg-slate-950 p-4 font-mono text-[11px] text-slate-300 max-h-80 overflow-auto">
-        <pre>{jsonString}</pre>
-      </div>
-    </div>
+      <CardContent className="p-0">
+        <div className="relative rounded-lg border border-border bg-background/80 p-4 font-mono text-xs text-muted-foreground max-h-72 overflow-auto">
+          <pre>{jsonString}</pre>
+        </div>
+      </CardContent>
+    </Card>
   );
 };

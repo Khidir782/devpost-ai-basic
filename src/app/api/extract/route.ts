@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Run extraction & PII sanitization
-    const posts = await extractWithGemini(rawText);
+    const { posts, engine } = await extractWithGemini(rawText);
 
     // Calculate aggregated percentages and isolate outliers
     const metrics = calculateMetrics(posts);
@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
       success: true,
       metrics,
       posts,
+      engine,
     };
 
     return NextResponse.json(payload, { status: 200 });

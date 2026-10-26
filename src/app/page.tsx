@@ -7,7 +7,8 @@ import { AnalyticsOverview } from "@/components/AnalyticsOverview";
 import { SanitizedRecordsTable } from "@/components/SanitizedRecordsTable";
 import { JsonOutputViewer } from "@/components/JsonOutputViewer";
 import { ExtractionResponse } from "@/lib/schemas";
-import { BarChart3, Database } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { BarChart3, ArrowRight } from "lucide-react";
 
 export default function Home() {
   const [rawText, setRawText] = useState("");
@@ -19,7 +20,7 @@ export default function Home() {
     // Client-side pre-validation: Catch empty input before hitting backend services
     if (!rawText || rawText.trim().length === 0) {
       setErrorMessage(
-        "Input cannot be empty. Please paste raw scraped Threads text or click 'Load Sample Scraped Data' to test."
+        "Input cannot be empty. Please paste raw scraped Threads text or click 'Load Sample Data' to test."
       );
       return;
     }
@@ -50,56 +51,59 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#090d16] text-slate-100 pb-20">
-      <div className="grid grid-cols-12 gap-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        {/* Header - Cols 1–12 */}
-        <Header />
+    <main className="min-h-screen bg-background text-foreground">
+      {/* Page sections get py-12 */}
+      <section className="py-12">
+        <div className="grid grid-cols-12 gap-5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header - Cols 1–12 */}
+          <Header engine={resultData?.engine} />
 
-        {/* Input Workbench - Cols 1–12 */}
-        <InputWorkbench
-          rawText={rawText}
-          setRawText={setRawText}
-          isLoading={isLoading}
-          onSubmit={handleExtract}
-          errorMessage={errorMessage}
-          setErrorMessage={setErrorMessage}
-        />
+          {/* Input Workbench - Cols 1–12 */}
+          <InputWorkbench
+            rawText={rawText}
+            setRawText={setRawText}
+            isLoading={isLoading}
+            onSubmit={handleExtract}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+          />
 
-        {/* Analytics Section - Cols 1–12 */}
-        <AnalyticsOverview
-          metrics={resultData ? resultData.metrics : null}
-          isLoading={isLoading}
-        />
+          {/* Analytics Section - Cols 1–12 */}
+          <AnalyticsOverview
+            metrics={resultData ? resultData.metrics : null}
+            isLoading={isLoading}
+          />
 
-        {/* Detailed Results (Sanitized Records & JSON Viewer) - Cols 1–12 */}
-        {resultData && !isLoading && (
-          <>
-            <SanitizedRecordsTable posts={resultData.posts} />
-            <JsonOutputViewer data={resultData} />
-          </>
-        )}
+          {/* Detailed Results (Records & JSON Viewer) - Cols 1–12 */}
+          {resultData && !isLoading && (
+            <>
+              <SanitizedRecordsTable posts={resultData.posts} />
+              <JsonOutputViewer data={resultData} />
+            </>
+          )}
 
-        {/* Empty State placeholder if not yet extracted and not loading */}
-        {!resultData && !isLoading && (
-          <div className="col-span-12 rounded-lg border border-dashed border-slate-800 bg-slate-900/30 p-8 text-center">
-            <div className="mx-auto max-w-md flex flex-col items-center">
-              <div className="p-3 rounded-full bg-slate-800/60 border border-slate-700/60 text-slate-400 mb-3">
-                <BarChart3 className="w-6 h-6 text-sky-400" />
-              </div>
-              <h3 className="text-sm font-semibold text-slate-200 mb-1">
-                Analytics & Structured Output Surface
-              </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Click &quot;Load Sample Scraped Data&quot; and &quot;Extract &amp; Transform&quot; to see category percentages, demographic outlier isolation, sanitized records, and copyable JSON populate on this 12-column grid.
-              </p>
-              <div className="mt-4 flex items-center space-x-2 text-[11px] font-mono text-slate-500">
-                <Database className="w-3.5 h-3.5 text-slate-400" />
-                <span>Ready for input transformation</span>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+          {/* Empty State placeholder if not yet extracted and not loading */}
+          {!resultData && !isLoading && (
+            <Card className="col-span-12 p-6 rounded-lg border border-dashed border-border bg-card text-center shadow-sm">
+              <CardContent className="p-0 py-8 max-w-sm mx-auto flex flex-col items-center">
+                <div className="w-10 h-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-primary mb-3">
+                  <BarChart3 className="w-5 h-5" />
+                </div>
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-1">
+                  Analytics Ready
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Click &ldquo;Load Sample Data&rdquo; and &ldquo;Extract &amp; Transform&rdquo; to populate topic metrics and demographic distributions.
+                </p>
+                <div className="mt-4 flex items-center space-x-1.5 text-xs font-mono text-muted-foreground">
+                  <span>Awaiting input</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-primary" />
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      </section>
     </main>
   );
 }

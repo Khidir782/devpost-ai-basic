@@ -70,7 +70,9 @@ export const ExtractionResponseSchema = z.object({
   success: z.boolean(),
   metrics: PipelineMetricsSchema,
   posts: z.array(ExtractedPostSchema),
+  engine: z.string().optional(),
   error: z.string().optional(),
 });
 
 export type ExtractionResponse = z.infer<typeof ExtractionResponseSchema>;
+
